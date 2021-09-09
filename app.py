@@ -9,7 +9,7 @@ app = Flask(__name__)
 mongo = PyMongo(app, uri='mongodb://localhost:27017/mars_db')
 
 #route to index.html 
-app.route("/")
+@app.route("/")
 def web():
     # mars = mongo.db.mars.find_one()
     # return render_template('index.html', mars=mars)
@@ -17,7 +17,7 @@ def web():
     # Find one record of data from mongo db
     mars = mongo.db.collection.find_one()
 
-    print(mars_data)
+    print(mars)
 
     # Return template and data
     return render_template("index.html", mars=mars)
