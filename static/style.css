@@ -2,3 +2,8 @@ h1 {
     color: blue;
 }
 
+/* Selecting elements by class */
+.container {
+    width: 1024px;
+    margin: 0 auto;
+  }
