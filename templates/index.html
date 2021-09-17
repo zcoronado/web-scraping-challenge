@@ -2,68 +2,68 @@
 <html lang="en">
 
 <!---------- Header---------->
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <title>Mission to Mars</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <title>Mission to Mars</title>
 </head>
 
-<!---------- Body ----------> 
+<!---------- Body ---------->
+
 <body>
-    <div class="container-fluid">
-        <div class="jumbotron text-center">
-            <h1 style="text-align:center;"><b>Mission to Mars</b></h1>
-            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1 style="text-align:center;">Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
     </div>
 
-    <!---------- Latest News ----------> 
-    <section> 
-      <h2><b>Latest Mars News:</b></h2>
-      <h3><b>{{ mars.title }}</b></h3>
-      <h3>{{ mars.body }}</h3>
-    </section>
+    <!---------- Latest News ---------->
+
+    <h2 class="text-center">Latest Mars News:</h2>
+    <h3 class="text-center">{{ mars.title }}</h3>
+    <h3 class="text-center">{{ mars.paragraph }}</h3>
 
 
-    <!---------- Featured Image ----------> 
-    <section> 
-      <h2><b>Featured Mars Image</b></h2>
-      
-      <img src="{{ img.headerimage }}" alt="Featured">
-    </section>
+    <!---------- Featured Image ---------->
 
-
-    <!---------- Mars Facts ----------> 
-    <section> 
-      <h3><b>Mars Facts</b></h3>
-    </section>
-
-
-
-    <!---------- Mars Hemispheres ----------> 
-    <section> 
-      <h2 style="text-align: center;"><b>Mars Hemispheres</b></h2>
-      {% for picture in mars.hem_list %}
-      <div class="col-md-2">
-                  <div class="card" style="width: 18px;">
-                    <img src="{{ picture.img_url }}"  width="100" height="100" alt="Mars Image" >
-                    <div class="card-body">
-                      <p class="card-text"> {{ picture.title }}
-                    </div>
-                  </div>
+    <div class="row bg-info p-4">
+      <div class="col-md-6">
+        <h2 class="text-center">Featured Mars Image</h2>
+        <img src="{{ mars.image }}" alt="Featured">
       </div>
-    
-  
-    {% endfor %}
-  </section>
-  
+
+      <!---------- Mars Facts ---------->
+      <div class="col-md-6">
+        <h2 class="text-center">Mars Facts</h2>
+        {{ mars.facts | safe}}
+      </div>
+
+    </div>
+
+
+    <!---------- Mars Hemispheres ---------->
+    <h2 style="text-align: center;">Mars Hemispheres</h2>
+    <div class="row bg-dark">
+
+      {% for picture in mars.hemis %}
+      <div class="col-md-3">
+        <img src="{{ picture.url }}" width="100%" alt="Mars Image">
+        <h3 class="text-center"> {{ picture.title }} </h3>
+      </div>
+      {% endfor %}
+    </div>
 
 
 
 
 
-    
+
+
+
+
 </body>
 
 
@@ -73,4 +73,3 @@
 
 
 </html>
-   

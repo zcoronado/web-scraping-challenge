@@ -15,7 +15,7 @@ def web():
     # return render_template('index.html', mars=mars)
     
     # Find one record of data from mongo db
-    mars = mongo.db.collection.find_one()
+    mars = mongo.db.mars.find_one()
 
     print(mars)
 
@@ -24,14 +24,13 @@ def web():
 
 # Route that will trigger the scrape function
 @app.route("/scrape")
-
-def scrape():
+def mars_scrape():
 
     # Run the scrape function
-    mars_dict = scrape.scrape_info()
+    mars_dict = scrape()
 
     # Update the Mongo database using update and upsert=True
-    mongo.db.collection.update({}, mars_dict, upsert=True)
+    mongo.db.mars.update({}, mars_dict, upsert=True)
 
     # Redirect back to home page
     return redirect("/")

@@ -5,28 +5,29 @@ executable_path = {'executable_path': ChromeDriverManager().install()}
 
 def scrape():
     browser = Browser('chrome', **executable_path, headless=False)
-    title, paragrah = news(browser)
+    title, paragraph = news(browser)
     data = {}
     data['title'] = title
-    data['paragrah'] = paragrah
+    data['paragraph'] = paragraph
     data['image'] = image(browser)
     data['facts'] = facts() 
     data['hemis'] = hemis(browser)
-
     return data 
 
 def news(browser):
     browser.visit('https://redplanetscience.com/')
     title = browser.find_by_css('div.content_title').text
-    paragrah = browser.find_by_css('div.article_teaser_body').text
-    return title, paragrah
+    paragraph = browser.find_by_css('div.article_teaser_body').text
+    return title, paragraph
 
 def image(browser):
     browser.visit('https://spaceimages-mars.com/')
     return browser.find_by_css('img.headerimage')['src']
 
 def facts():
-    return pd.read_html('https://galaxyfacts-mars.com/')[0].rename(columns ={ 0 : 'Index', 1 : 'Mars', 2 : 'Earth'}).to_html()
+    return pd.read_html('https://galaxyfacts-mars.com/',
+            header=None, index_col=None,)[0].rename(columns = {0: 'Index', 1:'Mars', 2:'Earth'}).to_html(index=False,
+            classes='table table-stripped')
 
 def hemis(browser): 
     browser.visit('https://marshemispheres.com/')
@@ -41,9 +42,3 @@ def hemis(browser):
         browser.back()
     browser.quit()
     return hemispheres
-
-
-
-
-
-
